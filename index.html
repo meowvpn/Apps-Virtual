@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>App Store • Virtual Play</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+/* ======== GLOBAL ======== */
+:root {
+    --navbar-height: 70px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (min-width: 1200px) {
+    body {
+        font-size: 18px;
+    }
+
+    .app-card {
+        padding: 30px;
+    }
+}
+
+body {
+    background: radial-gradient(circle at top, #0b0f2e, #050718);
+    color: #fff;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ======== HERO ======== */
+.hero {
+    min-height: 60vh;
+    padding-top: var(--navbar-height);
+    background: url("assets/background.png") center center / cover no-repeat;
+    background-color: #050718;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(5,7,24,.4), #050718 85%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 40px 20px 80px;
+}
+
+.hero h1 {
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+.hero p {
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    opacity: .85;
+}
+
+/* ======== NAVBAR ======== */
+.navbar {
+    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,.4);
+}
+
+/* ======== SECTION ======== */
+.section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    text-align: center;
+    opacity: .8;
+    margin-bottom: 50px;
+}
+
+/* ======== APP CARD ======== */
+.app-card {
+    position: relative;
+    background: linear-gradient(160deg, rgba(255,255,255,.12), rgba(255,255,255,.03));
+    border-radius: 28px;
+    backdrop-filter: blur(18px);
+    padding: 26px;
+    height: 100%;
+    transition: all .35s ease;
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.6),
+        inset 0 0 0 1px rgba(255,255,255,.12);
+    overflow: hidden;
+}
+
+/* Borda neon */
+.app-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    padding: 1.5px;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        #4fc3ff,
+        #7f5bff,
+        transparent
+    );
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: .35;
+    pointer-events: none;
+}
+
+.app-card:hover {
+    transform: none;
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.6),
+        inset 0 0 0 1px rgba(255,255,255,.12);
+}
+
+.app-card img {
+    width: 100%;
+    border-radius: 18px;
+    margin-bottom: 22px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.6);
+}
+
+.app-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+.app-info li {
+    list-style: none;
+    margin-bottom: 6px;
+}
+
+.app-info i {
+    color: #4fc3ff;
+    margin-right: 6px;
+}
+
+.btn-download {
+    background: linear-gradient(135deg, #ff7a18, #ff9f1a);
+    box-shadow: 0 0 20px rgba(255,160,40,.6);
+    border: none;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #000;
+    transition: .3s;
+}
+
+.btn-download:hover {
+    filter: brightness(1.1);
+    transform: scale(1.05);
+}
+
+/* ======== FOCO PARA CONTROLE REMOTO ======== */
+.app-card:focus {
+    outline: none;
+    transform: scale(1.08);
+    z-index: 10;
+    box-shadow:
+        0 0 0 4px rgba(79,195,255,1),
+        0 30px 80px rgba(0,160,255,.8);
+}
+
+.app-card:focus::before {
+    opacity: 1;
+}
+
+/* ======== FOOTER ======== */
+footer {
+    padding: 40px 0;
+    opacity: .7;
+    text-align: center;
+    font-size: .9rem;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ======== NAVBAR ======== -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand text-white fw-bold" href="#">
+            <img src="assets/logo.png" height="30" class="me-2">
+            VIRTUAL PLAY
+        </a>
+        <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link text-white" href="#apps">Aplicativos</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ======== HERO ======== -->
+<section class="hero d-flex align-items-center">
+    <div class="container hero-content">
+        <h1>APP STORE</h1>
+        <p>
+            Um mundo de entretenimento para sua família.<br>
+            Aplicativos sempre atualizados para Android TV, TV Box, Fire Stick e Celular.
+        </p>
+    </div>
+</section>
+
+<!-- ======== APPS ======== -->
+<section id="apps" class="container py-5">
+    <h2 class="section-title">Todos os aplicativos disponíveis abaixo</h2>
+    <p class="section-subtitle">
+        Encontre o aplicativo ideal, baixe, logue sua lista e aproveite conteúdos ilimitados.
+    </p>
+
+    <div class="row g-4">
+
+        <!-- APP 1 -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="app-card" tabindex="0">
+                <img src="assets/virtualplayibo.jpg" alt="VirtualPlay IBO">
+                <div class="app-title">VIRTUALPLAY IBO</div>
+
+                <ul class="app-info mt-3 mb-4">
+                    <li><i class="bi bi-tv"></i> Android TV</li>
+                    <li><i class="bi bi-box"></i> TV Box</li>
+                    <li><i class="bi bi-fire"></i> Fire Stick</li>
+                    <li><i class="bi bi-phone"></i> Celular</li>
+                    <li><i class="bi bi-download"></i> Cod Downloader: 6993080</li>
+                </ul>
+
+                <a href="https://virtualapps.sbs/apps/virtualplayibo.apk" class="btn btn-download w-100">BAIXAR</a>
+            </div>
+        </div>
+
+        <!-- APP 2 -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="app-card" tabindex="0">
+                <img src="assets/virtualplayunitv.jpg" alt="VirtualPlay UNITV">
+                <div class="app-title">VIRTUALPLAY UNITV</div>
+
+                <ul class="app-info mt-3 mb-4">
+                    <li><i class="bi bi-tv"></i> Android TV</li>
+                    <li><i class="bi bi-box"></i> TV Box</li>
+                    <li><i class="bi bi-fire"></i> Fire Stick</li>
+                    <li><i class="bi bi-phone"></i> Celular</li>
+                    <li><i class="bi bi-download"></i> Cod Downloader: 6511828</li>
+                </ul>
+
+                <a href="https://virtualapps.sbs/apps/virtualunitv.apk" class="btn btn-download w-100">BAIXAR</a>
+            </div>
+        </div>
+        
+        <!-- APP 3 -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="app-card" tabindex="0">
+                <img src="assets/newvirtualwave.jpg" alt="NewVirtual WAVE">
+                <div class="app-title">NEWVIRTUAL WAVE</div>
+
+                <ul class="app-info mt-3 mb-4">
+                    <li><i class="bi bi-tv"></i> Android TV</li>
+                    <li><i class="bi bi-box"></i> TV Box</li>
+                    <li><i class="bi bi-fire"></i> Fire Stick</li>
+                    <li><i class="bi bi-phone"></i> Celular</li>
+                    <li><i class="bi bi-download"></i> Cod Downloader: 2964573</li>
+                </ul>
+
+                <a href="https://virtualapps.sbs/apps/newvirtualwave.apk" class="btn btn-download w-100">BAIXAR</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ======== FOOTER ======== -->
+<footer>
+    © <span id="year"></span> • Meow 😻
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+<script>
+const cards = Array.from(document.querySelectorAll('.app-card'));
+let currentIndex = 0;
+
+function getCols() {
+    if (window.innerWidth >= 1200) return 3;
+    if (window.innerWidth >= 768) return 2;
+    return 1;
+}
+
+function focusCard(index) {
+    if (!cards[index]) return;
+    cards[index].focus({ preventScroll: true });
+    cards[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+    });
+}
+
+focusCard(currentIndex);
+
+document.addEventListener('keydown', (e) => {
+    const cols = getCols();
+
+    if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Enter'].includes(e.key)) {
+        e.preventDefault();
+    }
+
+    switch (e.key) {
+        case 'ArrowRight':
+            if (cards[currentIndex + 1]) currentIndex++;
+            break;
+
+        case 'ArrowLeft':
+            if (cards[currentIndex - 1]) currentIndex--;
+            break;
+
+        case 'ArrowDown':
+            if (cards[currentIndex + cols]) currentIndex += cols;
+            break;
+
+        case 'ArrowUp':
+            if (cards[currentIndex - cols]) currentIndex -= cols;
+            break;
+
+        case 'Enter':
+            const btn = cards[currentIndex].querySelector('.btn-download');
+            if (btn) btn.click();
+            break;
+    }
+
+    focusCard(currentIndex);
+});
+</script>
+</body>
+</html>
